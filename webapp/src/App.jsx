@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Marketplace from './pages/Marketplace.jsx';
 import ManageMaterials from './pages/ManageMaterials.jsx';
 import Payments from './pages/Payments.jsx';
+import { API_BASE } from './config.js';
 
 export default function App() {
   const [apiHealth, setApiHealth] = useState('checking...');
@@ -12,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch('http://localhost:4000/api/health', { signal: controller.signal })
+    fetch(`${API_BASE}/health`, { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => setApiHealth(`API ${data.status}`))
       .catch(() => setApiHealth('unreachable'));

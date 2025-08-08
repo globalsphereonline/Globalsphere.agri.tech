@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: gsat-backend
+    env: docker
+    dockerfilePath: Dockerfile.backend
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false

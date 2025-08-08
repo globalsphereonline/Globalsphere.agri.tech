@@ -29,6 +29,36 @@ npm run dev
 npm run build
 ```
 
+## Webapp env
+
+- Configure API base URL via `webapp/.env`:
+```
+VITE_API_BASE=http://localhost:4000/api
+```
+Netlify/CI will use `WEBAPP_VITE_API_BASE` secret to set this during builds.
+
+## Deployment
+
+### Webapp (Netlify)
+- Netlify config: `netlify.toml` (build in `webapp/`, publish `dist/`)
+- GitHub Action: `.github/workflows/deploy-webapp-netlify.yml`
+- Required repo secrets:
+  - `NETLIFY_AUTH_TOKEN`
+  - `NETLIFY_SITE_ID`
+  - `WEBAPP_VITE_API_BASE` (e.g., `https://<your-backend-domain>/api`)
+
+### Backend (Render)
+- Render blueprint: `render.yaml` (Docker deploy of `Dockerfile.backend`)
+- Either connect the repo in Render (auto-deploy) or set repo secrets and use Action:
+  - `RENDER_API_KEY`
+  - `RENDER_SERVICE_ID`
+- Set env vars in Render Dashboard:
+  - `PORT=4000`
+  - `NODE_ENV=production`
+  - `MONGODB_URI` (MongoDB Atlas connection string)
+
+After deploying, update the webapp’s API base to point to the backend public URL.
+
 ## Structure (high-level)
 
 - `backend/`: configs, controllers, models, routes, utils, media, onboarding, and `raw_materials.json`

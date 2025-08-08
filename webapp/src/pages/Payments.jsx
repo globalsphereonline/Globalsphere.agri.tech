@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-const API_BASE = 'http://localhost:4000/api/payments';
+import { API_BASE } from '../config.js';
 
 export default function Payments() {
   const [amount, setAmount] = useState(1000);
@@ -13,7 +12,7 @@ export default function Payments() {
     setError('');
     setResult(null);
     try {
-      const res = await fetch(`${API_BASE}/stripe/intent`, {
+      const res = await fetch(`${API_BASE}/payments/stripe/intent`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: Number(amount), currency }),
@@ -30,7 +29,7 @@ export default function Payments() {
     setError('');
     setResult(null);
     try {
-      const res = await fetch(`${API_BASE}/paypal/order`, {
+      const res = await fetch(`${API_BASE}/payments/paypal/order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: Number(amount) / 100, currency: currency.toUpperCase() }),

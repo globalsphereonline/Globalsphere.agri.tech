@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { API_BASE } from '../config.js';
 
 export default function Marketplace() {
   const [items, setItems] = useState([]);
@@ -13,7 +14,7 @@ export default function Marketplace() {
     const params = new URLSearchParams();
     if (search) params.set('q', search);
     if (category) params.set('category', category);
-    fetch(`http://localhost:4000/api/materials?${params.toString()}`, { signal: controller.signal })
+    fetch(`${API_BASE}/materials?${params.toString()}`, { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => setItems(Array.isArray(data.items) ? data.items : []))
       .catch(() => setItems([]))
