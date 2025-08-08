@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Dashboard from './pages/Dashboard.jsx';
 import Marketplace from './pages/Marketplace.jsx';
 
 export default function App() {
   const [apiHealth, setApiHealth] = useState('checking...');
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -20,15 +22,24 @@ export default function App() {
       <div className="min-h-screen bg-gray-50 text-gray-900">
         <header className="border-b bg-white">
           <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-            <Link to="/" className="text-xl font-semibold">GLOBAL-SPHERE-AGRI-TECH</Link>
+            <Link to="/" className="text-xl font-semibold">{t('appTitle')}</Link>
             <nav className="flex items-center gap-4 text-sm">
               <NavLink to="/" end className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
-                Dashboard
+                {t('dashboard')}
               </NavLink>
               <NavLink to="/marketplace" className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
-                Marketplace
+                {t('marketplace')}
               </NavLink>
-              <span className="text-gray-500">{apiHealth}</span>
+              <select
+                aria-label="language"
+                className="rounded border px-2 py-1 text-xs"
+                value={i18n.language}
+                onChange={(e) => i18n.changeLanguage(e.target.value)}
+              >
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+              </select>
+              <span className="text-gray-500 hidden sm:inline">{apiHealth}</span>
             </nav>
           </div>
         </header>

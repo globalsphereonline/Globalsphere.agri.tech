@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Marketplace() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -27,7 +29,7 @@ export default function Marketplace() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-xl font-semibold">Marketplace</h2>
+        <h2 className="text-xl font-semibold">{t('marketplace')}</h2>
         <div className="flex gap-2">
           <input
             value={search}
@@ -48,7 +50,7 @@ export default function Marketplace() {
       </div>
 
       {loading ? (
-        <div className="text-sm text-gray-600">Loading...</div>
+        <div className="text-sm text-gray-600">{t('loading')}</div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, idx) => (
@@ -64,7 +66,7 @@ export default function Marketplace() {
             </div>
           ))}
           {items.length === 0 && (
-            <div className="text-sm text-gray-600">No results.</div>
+            <div className="text-sm text-gray-600">{t('noResults')}</div>
           )}
         </div>
       )}
