@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
+import Dashboard from './pages/Dashboard.jsx';
+import Marketplace from './pages/Marketplace.jsx';
 
 export default function App() {
   const [apiHealth, setApiHealth] = useState('checking...');
@@ -13,24 +16,30 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      <header className="border-b bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-semibold">GLOBAL-SPHERE-AGRI-TECH</h1>
-          <span className="text-sm text-gray-600">{apiHealth}</span>
-        </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card title="Dashboard" description="KPIs, analytics, and AI insights" />
-          <Card title="Marketplace" description="Raw materials listings and trades" />
-          <Card title="Logistics" description="Shipments, tracking, and compliance" />
-          <Card title="Payments" description="Stripe/PayPal integrations" />
-          <Card title="Media" description="Photo/video/audio handlers with AI tagging" />
-          <Card title="Onboarding" description="Multilingual walkthroughs" />
-        </div>
-      </main>
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-50 text-gray-900">
+        <header className="border-b bg-white">
+          <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+            <Link to="/" className="text-xl font-semibold">GLOBAL-SPHERE-AGRI-TECH</Link>
+            <nav className="flex items-center gap-4 text-sm">
+              <NavLink to="/" end className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
+                Dashboard
+              </NavLink>
+              <NavLink to="/marketplace" className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
+                Marketplace
+              </NavLink>
+              <span className="text-gray-500">{apiHealth}</span>
+            </nav>
+          </div>
+        </header>
+        <main className="mx-auto max-w-6xl px-6 py-10">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/marketplace" element={<Marketplace />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
