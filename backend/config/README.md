@@ -1,0 +1,1 @@
+Configuration files for Stripe, PayPal, Firebase, and database connections will live here.

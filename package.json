@@ -1,0 +1,20 @@
+{
+  "name": "global-sphere-agri-tech",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "webapp",
+    "mobileapp"
+  ],
+  "scripts": {
+    "dev": "concurrently -n BACKEND,WEB -c blue,green \"npm:dev:backend\" \"npm:dev:webapp\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:webapp": "npm run dev -w webapp",
+    "build": "npm run build -ws --if-present",
+    "start": "npm run start -w backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

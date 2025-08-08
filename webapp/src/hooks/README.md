@@ -1,0 +1,1 @@
+Custom hooks for payments, social integration, etc.
