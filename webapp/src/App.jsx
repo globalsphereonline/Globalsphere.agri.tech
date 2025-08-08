@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Dashboard from './pages/Dashboard.jsx';
 import Marketplace from './pages/Marketplace.jsx';
+import ManageMaterials from './pages/ManageMaterials.jsx';
+import Payments from './pages/Payments.jsx';
 
 export default function App() {
   const [apiHealth, setApiHealth] = useState('checking...');
@@ -30,6 +32,12 @@ export default function App() {
               <NavLink to="/marketplace" className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
                 {t('marketplace')}
               </NavLink>
+              <NavLink to="/manage" className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
+                Manage
+              </NavLink>
+              <NavLink to="/payments" className={({ isActive }) => isActive ? 'font-medium text-blue-600' : 'text-gray-700'}>
+                Payments
+              </NavLink>
               <select
                 aria-label="language"
                 className="rounded border px-2 py-1 text-xs"
@@ -47,6 +55,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/manage" element={<ManageMaterials />} />
+            <Route path="/payments" element={<Payments />} />
           </Routes>
         </main>
       </div>

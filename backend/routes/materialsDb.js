@@ -1,12 +1,17 @@
 import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createMaterial, deleteMaterial, getMaterial, listMaterials, updateMaterial } from '../controllers/materialsDbController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const uploadsDir = path.resolve(__dirname, '..', 'uploads');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: uploadsDir,

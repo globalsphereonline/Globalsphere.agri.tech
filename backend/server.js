@@ -5,8 +5,13 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import apiRouter from './routes/index.js';
 import { connectToDatabase } from './config/db.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;
@@ -15,6 +20,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 
 app.get('/', (req, res) => {
   res.json({

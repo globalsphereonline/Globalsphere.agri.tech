@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      - PORT=4000
+      - MONGODB_URI=mongodb://mongo:27017/global_sphere_agri_tech
+      - NODE_ENV=production
+    depends_on:
+      - mongo
+    ports:
+      - '4000:4000'
+    volumes:
+      - backend_uploads:/app/uploads
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.webapp
+    depends_on:
+      - backend
+    ports:
+      - '5173:5173'
+volumes:
+  mongo_data:
+  backend_uploads:
