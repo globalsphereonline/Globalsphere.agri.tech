@@ -2,6 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 const API_BASE = 'http://localhost:4000/api';
 
+function fetchWithTimeout(resource, options = {}, timeoutMs = 1500) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(resource, { ...options, signal: controller.signal }).finally(() => clearTimeout(id));
+}
+
 export default function ManageMaterials() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState('');
@@ -36,7 +42,7 @@ export default function ManageMaterials() {
     setError('');
     try {
       const params = new URLSearchParams({ page: String(page), limit: String(limit), sort });
-      const res = await fetch(`${API_BASE}/v2/materials?${params.toString()}`);
+      const res = await fetchWithTimeout(`${API_BASE}/v2/materials?${params.toString()}`);
       if (!res.ok) throw new Error('v2 unavailable');
       const data = await res.json();
       setItems(data.items || []);
@@ -44,7 +50,7 @@ export default function ManageMaterials() {
     } catch (e) {
       // fallback to legacy JSON (no pagination)
       try {
-        const res = await fetch(`${API_BASE}/materials`);
+        const res = await fetchWithTimeout(`${API_BASE}/materials`);
         const data = await res.json();
         setItems(data.items || []);
         setTotal((data.items || []).length);
@@ -72,10 +78,10 @@ export default function ManageMaterials() {
       }
     });
     try {
-      const res = await fetch(`${API_BASE}/v2/materials`, {
+      const res = await fetchWithTimeout(`${API_BASE}/v2/materials`, {
         method: 'POST',
         body,
-      });
+      }, 4000);
       if (!res.ok) throw new Error('create failed');
       setForm({ category: 'agriculture', item: '', unit: 'ton', grade: '', purity: '', description: '', pricePerUnit: '', media: [] });
       await fetchItems();
