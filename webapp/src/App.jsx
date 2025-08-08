@@ -63,12 +63,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-function Card({ title, description }) {
-  return (
-    <div className="rounded-lg border bg-white p-5 shadow-sm">
-      <h2 className="text-lg font-medium">{title}</h2>
-      <p className="mt-1 text-sm text-gray-600">{description}</p>
-    </div>
-  );
-}

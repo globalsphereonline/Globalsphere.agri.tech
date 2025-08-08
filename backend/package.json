@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build": "echo \"No build step for backend\""
+    "build": "echo \"No build step for backend\"",
+    "lint": "eslint . --ext .js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --colors"
   },
   "dependencies": {
     "@paypal/checkout-server-sdk": "^1.0.3",
@@ -22,6 +24,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "cross-env": "^7.0.3"
   }
 }

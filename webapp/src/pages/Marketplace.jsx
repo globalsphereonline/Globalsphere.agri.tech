@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function Marketplace() {
@@ -20,11 +20,6 @@ export default function Marketplace() {
       .finally(() => setLoading(false));
     return () => controller.abort();
   }, [search, category]);
-
-  const categories = useMemo(() => {
-    const set = new Set(items.map((i) => i.category));
-    return Array.from(set);
-  }, [items]);
 
   return (
     <div className="space-y-6">
