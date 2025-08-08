@@ -44,8 +44,12 @@ app.use((err, req, res, _next) => {
 async function start() {
   try {
     if (process.env.MONGODB_URI) {
-      await connectToDatabase();
-      console.log('Connected to MongoDB');
+      try {
+        await connectToDatabase();
+        console.log('Connected to MongoDB');
+      } catch (dbErr) {
+        console.warn('Failed to connect to MongoDB, continuing without DB:', dbErr.message);
+      }
     } else {
       console.log('MONGODB_URI not set, continuing without DB');
     }
