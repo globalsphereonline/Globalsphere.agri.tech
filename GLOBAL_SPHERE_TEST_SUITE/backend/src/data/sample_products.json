@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "sku": "AG-001",
+    "name": "Kenya Avocado",
+    "category": "Fruit",
+    "country": "Kenya",
+    "price": 1.5,
+    "images": [
+      "/images/avocado1.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "sku": "AG-002",
+    "name": "Basmati Rice 5kg",
+    "category": "Grain",
+    "country": "India",
+    "price": 12.5,
+    "images": [
+      "/images/rice1.jpg"
+    ]
+  }
+]

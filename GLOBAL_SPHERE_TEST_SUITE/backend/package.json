@@ -1,0 +1,23 @@
+{
+  "name": "gsat-backend-tests",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "test": "jest --coverage",
+    "test:unit": "jest --runInBand --testPathPattern=__tests__/unit",
+    "test:integration": "jest --runInBand --testPathPattern=__tests__/integration",
+    "test:e2e": "cypress run --config baseUrl=http://localhost:3000"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@supabase/supabase-js": "^2.0.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^6.3.0",
+    "cypress": "^12.0.0",
+    "cross-env": "^7.0.3"
+  }
+}
