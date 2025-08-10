@@ -1,0 +1,6 @@
+[
+  { "category": "agriculture", "item": "Wheat", "unit": "ton", "grade": "A" },
+  { "category": "agriculture", "item": "Maize", "unit": "ton", "grade": "A" },
+  { "category": "minerals", "item": "Gold", "unit": "kg", "purity": "99.99%" },
+  { "category": "minerals", "item": "Silver", "unit": "kg", "purity": "99.9%" }
+]

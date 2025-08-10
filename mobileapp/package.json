@@ -1,0 +1,9 @@
+{
+  "name": "mobileapp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo \"Run mobile app locally using Expo or React Native CLI\"",
+    "build": "echo \"Skipping mobile build in this environment\""
+  }
+}
