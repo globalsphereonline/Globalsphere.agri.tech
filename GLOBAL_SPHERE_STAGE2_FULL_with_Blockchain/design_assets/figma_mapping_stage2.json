@@ -1,0 +1,13 @@
+{
+  "screens": [
+    "Landing",
+    "Products",
+    "Product Detail",
+    "Shop Builder Step 1",
+    "Shop Builder Step 2",
+    "Chat",
+    "Courier Map",
+    "Analytics"
+  ],
+  "notes": "Import provided PNG frames into Figma and map components to React components in webapp/src/components."
+}
